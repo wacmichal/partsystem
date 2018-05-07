@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:partsystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="350" Width="240.299">
+    <Grid Margin="0,0,293.4,-19.2">
+        <PasswordBox HorizontalAlignment="Left" Margin="34,163,-195,0" VerticalAlignment="Top" Width="161" RenderTransformOrigin="0.116,0.086" Height="27"/>
     </Grid>
 </Window>
