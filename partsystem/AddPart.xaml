@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:partsystem"
         mc:Ignorable="d"
-        Title="AddPart" Height="300" Width="300">
+        Title="AddPart" Height="600" Width="800" ResizeMode="NoResize">
     <Grid>
-        
+        <DataGrid x:Name="ExistingPartsDataGrid" HorizontalAlignment="Left" Height="459" Margin="10,101,0,0" VerticalAlignment="Top" Width="774" AutoGenerateColumns="False" SelectionChanged="ExistingPartsDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"/>
+                <DataGridTextColumn Header="PartID" />
+                <DataGridTextColumn Header="name" />
+                <DataGridTextColumn Header="descritpion" />
+                <DataGridTextColumn Header="type" />
+                <DataGridTextColumn Header="ext_name" />
+            </DataGrid.Columns>
+            </DataGrid>
     </Grid>
 </Window>
