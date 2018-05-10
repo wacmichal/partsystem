@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="LoginWindow" Height="350" Width="240.299">
     <Grid Margin="0,0,293.4,-19.2">
-        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Height="30" Margin="34,84,-195,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
+        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Height="30" Margin="34,84,-195,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161" Text="root"/>
         <Button Content="Zaloguj" HorizontalAlignment="Left" Margin="34,213,-195,0" VerticalAlignment="Top" Width="161" Height="67" Click="Button_Click" FontFamily="Tahoma" FontSize="20" FontWeight="Bold"/>
         <PasswordBox x:Name="PassBox" HorizontalAlignment="Left" Margin="34,161,-195,0" VerticalAlignment="Top" Width="161" Height="26"/>
     </Grid>

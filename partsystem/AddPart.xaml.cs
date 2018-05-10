@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,13 +30,22 @@ namespace partsystem
     public partial class AddPart : Window
     {
         MySqlConnection connection;
+        List<ExisitingPart> PartListGlobal;
+        bool PartAddedNotSaved;
         public AddPart()
         {
             InitializeComponent();
+            UpdateParts();
+                 
             
-            this.ExistingPartsDataGrid.ItemsSource = PartList();
-        }
 
+           // MessageBox.Show(prts[1].id.ToString());
+
+        }
+        private void UpdateParts() {
+            PartListGlobal = PartList();
+            this.ExistingPartsDataGrid.ItemsSource = PartListGlobal;
+        }
         private bool ConnectDB()
         {
             try
@@ -74,7 +84,7 @@ namespace partsystem
                 dataReader.Close();
                 connection.Close();
          
-     
+
                 return list;
             }
             else
@@ -82,10 +92,41 @@ namespace partsystem
                 return list;
             }
         }
+       
 
         private void ExistingPartsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            //poszerzenie okna , wyswietlenie kolejno parametrow, przycisk zapisz/anuluj
+            this.Width = 1200;
+            ItemDetailsGrid.Visibility = Visibility.Visible ;
+            var part = ExistingPartsDataGrid.SelectedItem as ExisitingPart;
+            if (part != null)
+            {
+                PartIDTB.Text = part.part_id.ToString();
+                NameTB.Text = part.name;
+                DescriptionTB.Text = part.description;
+                TypeTB.Text = part.type;
+                ExtNameTB.Text = part.ext_name;
+            }
         }
+
+     
+
+        private void _CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseWindow ChooseWindow = new ChooseWindow();
+            ChooseWindow.Show();
+            this.Close();
+        }
+
+        private void AddPartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(!PartAddedNotSaved)
+                PartListGlobal.Add(new ExisitingPart());
+            ExistingPartsDataGrid.Items.Refresh();
+            PartAddedNotSaved = true;
+        }
+
+        
     }
 }

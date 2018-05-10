@@ -5,17 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:partsystem"
         mc:Ignorable="d"
-        Title="AddPart" Height="600" Width="800" ResizeMode="NoResize">
+        Title="AddPart" Height="600" Width="1236.8" ResizeMode="NoResize">
     <Grid>
-        <DataGrid x:Name="ExistingPartsDataGrid" HorizontalAlignment="Left" Height="459" Margin="10,101,0,0" VerticalAlignment="Top" Width="774" AutoGenerateColumns="False" SelectionChanged="ExistingPartsDataGrid_SelectionChanged">
+        <DataGrid SelectionMode="Single" CanUserAddRows="false" x:Name="ExistingPartsDataGrid" HorizontalAlignment="Left" Height="459" Margin="10,101,0,0" VerticalAlignment="Top" Width="774" AutoGenerateColumns="False" SelectionChanged="ExistingPartsDataGrid_SelectionChanged">
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID"/>
-                <DataGridTextColumn Header="PartID" />
-                <DataGridTextColumn Header="name" />
-                <DataGridTextColumn Header="descritpion" />
-                <DataGridTextColumn Header="type" />
-                <DataGridTextColumn Header="ext_name" />
+                <DataGridTextColumn  Binding="{Binding id}" x:Name="id" Header="id"/>
+                <DataGridTextColumn  Binding="{Binding part_id}" x:Name="part_id" Header="PartID" />
+                <DataGridTextColumn   Binding="{Binding name}" Header="name" />
+                <DataGridTextColumn   Binding="{Binding description}" Header="descritpion" />
+                <DataGridTextColumn  Binding="{Binding type}" Header="type" Foreground="#FF9E1A1A" MinWidth="50" />
+                <DataGridTextColumn  Binding="{Binding ext_name}" Header="ext_name" />
             </DataGrid.Columns>
-            </DataGrid>
+        </DataGrid>
+        <Button x:Name="AddPartButton" Content="ADD &#xD;&#xA;PART&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="86" Height="86" Click="AddPartButton_Click"/>
+        <Button x:Name="_CloseButton" Content="ZAMKNIJ" HorizontalAlignment="Left" Margin="698,10,0,0" VerticalAlignment="Top" Width="86" Height="86" Click="_CloseButton_Click"/>
+        <Grid x:Name="ItemDetailsGrid" HorizontalAlignment="Left" Height="351" Margin="789,10,0,0" VerticalAlignment="Top" Width="395" Visibility="Visible">
+            <Label Content="Part ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="50" Width="105" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Name" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Height="50" Width="105" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Description" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="50" Width="105" FontSize="16" FontWeight="Bold"/>
+            <Label Content="Type" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Height="50" Width="105" FontSize="20" FontWeight="Bold"/>
+            <Label Content="Ext. name" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Height="50" Width="105" FontSize="18" FontWeight="Bold"/>
+            <TextBox x:Name="PartIDTB" HorizontalAlignment="Left" Height="50" Margin="120,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+            <TextBox x:Name="NameTB" HorizontalAlignment="Left" Height="50" Margin="120,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+            <TextBox x:Name="DescriptionTB" HorizontalAlignment="Left" Height="50" Margin="120,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+            <TextBox x:Name="TypeTB" HorizontalAlignment="Left" Height="50" Margin="120,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+            <TextBox x:Name="ExtNameTB" HorizontalAlignment="Left" Height="50" Margin="120,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="265"/>
+            <Button x:Name="CancelBUTTON" Content="Anuluj" HorizontalAlignment="Left" Height="50" Margin="120,285,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="SaveButton" Content="Zapisz" HorizontalAlignment="Left" Height="50" Margin="225,285,0,0" VerticalAlignment="Top" Width="160"/>
+        </Grid>
     </Grid>
 </Window>
