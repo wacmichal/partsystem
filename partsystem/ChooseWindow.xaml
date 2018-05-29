@@ -8,9 +8,9 @@
         Title="ChooseWindow" Height="291.438" Width="300">
     <Grid Margin="0,0,3.6,9.6">
         <Button x:Name="_buttonAdd" Content="Dodaj &#xD;&#xA;część" HorizontalAlignment="Left" Margin="26,25,0,0" VerticalAlignment="Top" Width="118" Height="100" Click="_buttonAdd_Click" RenderTransformOrigin="2.605,1.098"/>
-        <Button x:Name="_buttonManage" Content="Zarządzanie&#xD;&#xA;" HorizontalAlignment="Left" Margin="26,130,0,0" VerticalAlignment="Top" Width="118" Height="100" RenderTransformOrigin="1.542,0.498"/>
+        <Button x:Name="_buttonManage" Content="Status&#xA;" HorizontalAlignment="Left" Margin="26,130,0,0" VerticalAlignment="Top" Width="118" Height="100" RenderTransformOrigin="1.542,0.498" Click="_buttonManage_Click"/>
         <Button x:Name="_buttonSub" Content="Pobieranie &#xD;&#xA;częsci&#xD;&#xA;" HorizontalAlignment="Left" Margin="149,25,0,0" VerticalAlignment="Top" Width="118" Height="100"/>
-        <Button x:Name="_buttonClose" Content="Wyłoncz xd&#xD;&#xA;" HorizontalAlignment="Left" Margin="149,130,0,0" VerticalAlignment="Top" Width="118" Height="100" RenderTransformOrigin="1.542,0.498" Click="_buttonClose_Click"/>
+        <Button x:Name="_buttonClose" Content="Wyłącz&#xA;" HorizontalAlignment="Left" Margin="149,130,0,0" VerticalAlignment="Top" Width="118" Height="100" RenderTransformOrigin="1.542,0.498" Click="_buttonClose_Click"/>
 
     </Grid>
 </Window>

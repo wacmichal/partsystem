@@ -34,7 +34,7 @@ namespace partsystem
         {
             try
             {
-                if (TryLogin(LoginBox.Text, PassBox.Password))
+                if (PartSystem.TryLogin(LoginBox.Text, PassBox.Password))
                 {
                     ChooseWindow choosewindow = new ChooseWindow();
                     choosewindow.Show();
@@ -63,24 +63,7 @@ namespace partsystem
             }
         }
 
-        private bool TryLogin(string user, string password)
-        {
-            
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.CommandText = "Select * from users where login=@user and password=@pass";
-            cmd.Parameters.AddWithValue("@user", user);
-            cmd.Parameters.AddWithValue("@pass", password);
-            cmd.Connection = connection;
-            MySqlDataReader login = cmd.ExecuteReader();
-            if (login.Read())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+      
 
       
     }

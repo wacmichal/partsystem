@@ -18,87 +18,26 @@ namespace partsystem
     /// <summary>
     /// Logika interakcji dla klasy Window1.xaml
     /// </summary>
-    class ExisitingPart
-    {
-        public int id { get; set; }
-        public int part_id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string type { get; set; }
-        public string ext_name { get; set; }
-    }
+  
     public partial class AddPart : Window
     {
-        MySqlConnection connection;
+
         List<ExisitingPart> PartListGlobal;
         private ExisitingPart part;
         bool PartAddedNotSaved;
         public AddPart()
         {
             InitializeComponent();
-            UpdateParts();
-
-
-
-            // MessageBox.Show(prts[1].id.ToString());
-
+            Refresh();
         }
-        private void UpdateParts()
-        {
-            PartListGlobal = PartList();
-            this.ExistingPartsDataGrid.ItemsSource = PartListGlobal;
-        }
-        private bool ConnectDB()
-        {
-            try
-            {
-                connection = new MySqlConnection("SERVER = localhost; " + "DATABASE = partsystem; " + "UID = root; " + "PASSWORD=1; " + "sslmode = none; ");
-                connection.Open();
-                return true;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return false;
-            }
-        }
+    
+   
 
-
-        private List<ExisitingPart> PartList()
-        {
-            var list = new List<ExisitingPart>();
-            if (this.ConnectDB() == true)
-            {
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM parts", connection);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    list.Add(new ExisitingPart
-                    {
-                        id = int.Parse(dataReader["id"].ToString()),
-                        part_id = int.Parse(dataReader["part_id"].ToString()),
-                        name = dataReader["name"].ToString(),
-                        description = dataReader["description"].ToString(),
-                        type = dataReader["type"].ToString(),
-                        ext_name = dataReader["ext_name"].ToString()
-                    });
-                }
-                dataReader.Close();
-                connection.Close();
-
-
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
 
 
         private void ExistingPartsDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //poszerzenie okna , wyswietlenie kolejno parametrow, przycisk zapisz/anuluj
+            
             this.Width = 1200;
             ItemDetailsGrid.Visibility = Visibility.Visible;
             part = ExistingPartsDataGrid.SelectedItem as ExisitingPart;
@@ -110,10 +49,10 @@ namespace partsystem
                     PartIDTB.Text = "";
                 NameTB.Text = part.name;
                 DescriptionTB.Text = part.description;
-                TypeTB.Text = part.type;
+              //  searchTypeCB.SelectedIndex = part.type; DO ZROBIENIA!
                 ExtNameTB.Text = part.ext_name;
             }
-        }
+ }
 
 
 
@@ -136,60 +75,44 @@ namespace partsystem
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (part.id == 0)
-                CreatePart();
-            else
-                UpdatePart();
-        }
-        private void UpdatePart() {
-            if (this.ConnectDB() == true && part != null)
-            {
+            
+        PartSystem.AddUpdate(PartIDTB.Text, NameTB.Text, DescriptionTB.Text, (ChangeTypeCB.SelectedItem as ComboBoxItem).Content.ToString(), ExtNameTB.Text, part.id);
+        Refresh();
 
-                string cmdText = String.Format("UPDATE parts SET part_id = '{0}',name = '{1}', description = '{2}',type = '{3}', ext_name = '{4}' WHERE id = '{5}' ", PartIDTB.Text
-                , NameTB.Text
-                , DescriptionTB.Text
-               , TypeTB.Text
-               , ExtNameTB.Text, part.id);
-                MySqlCommand cmd = new MySqlCommand(cmdText, connection);
-                cmd.ExecuteNonQuery();
-                connection.Close();
-                UpdateParts();
-                ExistingPartsDataGrid.Items.Refresh();
-                this.Width = 800;
-                ItemDetailsGrid.Visibility = Visibility.Hidden;
 
-            }
         }
-        private void CreatePart()
+   
+        private void Refresh()
         {
 
-
-            if (this.ConnectDB() == true)
-            {
-
-                string cmdText = String.Format("INSERT INTO parts (part_id,name,description,type,ext_name) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}') ", PartIDTB.Text
-                , NameTB.Text
-                , DescriptionTB.Text
-               , TypeTB.Text
-               , ExtNameTB.Text);
-                MySqlCommand cmd = new MySqlCommand(cmdText, connection);
-                cmd.ExecuteNonQuery();
-                connection.Close();
-                UpdateParts();
-                ExistingPartsDataGrid.Items.Refresh();
-                this.Width = 800;
-                ItemDetailsGrid.Visibility = Visibility.Hidden;
-                PartAddedNotSaved = false;
-            }
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateParts();
+            PartListGlobal = PartSystem.PartList();
+            this.ExistingPartsDataGrid.ItemsSource = PartListGlobal;
             ExistingPartsDataGrid.Items.Refresh();
             this.Width = 800;
             ItemDetailsGrid.Visibility = Visibility.Hidden;
             PartAddedNotSaved = false;
         }
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ExistingPartsDataGrid.ItemsSource = PartSystem.SearchInList(PartListGlobal, SearchBox.Text, (searchTypeCB.SelectedItem as ComboBoxItem).Content.ToString());
+
+            ExistingPartsDataGrid.Items.Refresh();
+           
+        }
+
+        private void searchTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+          
+           }
     }
 }

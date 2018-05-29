@@ -34,6 +34,13 @@ namespace partsystem
         {
             this.Close();
         }
+
+        private void _buttonManage_Click(object sender, RoutedEventArgs e)
+        {
+            Status Status = new Status();
+            Status.Show();
+            this.Close();
+        }
     }
     
 }
